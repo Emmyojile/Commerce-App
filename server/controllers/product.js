@@ -48,7 +48,7 @@ exports.getAllProducts = async (req, res) => {
             return res.status(StatusCodes.NOT_FOUND).json({ msg: 'No Products available yet' })
         }
 
-        return res.status(StatusCodes.OK).json({TotalProducts: products.length, products})
+        return res.status(StatusCodes.OK).json(products);
     } catch (error) {
         console.log(error);
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error: error.message});   

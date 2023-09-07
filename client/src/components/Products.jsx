@@ -14,32 +14,33 @@ const Container = styled.div`
 const Products = ({ cat, filters, sort }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  
 
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await axios.get(
-           `/products`
+        const {data} = await axios.get(
+          cat
+           ? `/products?category=${cat}`
+           : `/products`
         );
-        console.log(res.data);
-        setProducts(res.data);
+        console.log(data);
+        setProducts(data);
       } catch (err) {}
     };
     getProducts();
   }, [cat]);
 
-  // useEffect(() => {
-  //   cat &&
-  //     setFilteredProducts(
-  //       products.filter((item) =>
-  //         Object.entries(filters).every(([key, value]) =>
-  //           item[key].includes(value)
-  //         )
-  //       )
-  //     );
-  // }, [products, cat, filters]);
-
-  // console.log(filteredProducts);
+  useEffect(() => {
+    cat &&
+      setFilteredProducts(
+        products.filter((item) =>
+          Object.entries(filters).every(([key, value]) =>
+            item[key].includes(value)
+          )
+        )
+      );
+  }, [products, cat, filters]);
 
   return (
     <Container>
