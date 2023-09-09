@@ -66,8 +66,9 @@ const ProductList = () => {
             </Option>
             <Option>white</Option>
             <Option>black</Option>
-            <Option>bed</Option>
+            <Option>red</Option>
             <Option>blue</Option>
+            <Option>brown</Option>
             <Option>yellow</Option>
             <Option>green</Option>
           </Select>
