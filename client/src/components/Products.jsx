@@ -24,7 +24,6 @@ const Products = ({ cat, filters, sort }) => {
            ? `/products?category=${cat}`
            : `/products`
         );
-        console.log(data);
         setProducts(data);
       } catch (err) {}
     };
