@@ -6,7 +6,7 @@ const {verifyToken, verifyTokenAndAuth, verifyTokenAndAdmin} = require('../middl
 
 router.route('/').post(createProduct)
 router.route('/').get(getAllProducts)
-router.route('/products/:id').get(getSingleProduct).put(verifyTokenAndAdmin,updateProduct).delete(deleteProduct)
+router.route('/singleProduct/:id').get(getSingleProduct).put(verifyTokenAndAdmin,updateProduct).delete(deleteProduct)
 
 
 module.exports = router

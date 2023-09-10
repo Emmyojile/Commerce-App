@@ -8,7 +8,7 @@ exports.createProduct = async (req,res)=> {
         const newProduct = new Product(req.body);
         
         const savedProduct = await newProduct.save();
-        return res.status(StatusCodes.OK).json({savedProduct})
+        return res.status(StatusCodes.OK).json(savedProduct)
     } catch (error) {
         console.log(error);
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error: error.message});   
@@ -19,7 +19,7 @@ exports.createProduct = async (req,res)=> {
 exports.getSingleProduct = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
-        return res.status(StatusCodes.OK).json({ product})
+        return res.status(StatusCodes.OK).json(product)
     } catch (error) {
         console.log(error);
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error: error.message});   
@@ -59,7 +59,7 @@ exports.getAllProducts = async (req, res) => {
 exports.updateProduct = async (req, res) => {
     try {
         const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {$set:req.body,},{new:true});
-        return res.status(StatusCodes.OK).json({updatedProduct})
+        return res.status(StatusCodes.OK).json(updatedProduct)
     } catch (error) {
         console.log(error);
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error: error.message});   

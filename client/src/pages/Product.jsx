@@ -5,6 +5,10 @@ import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { Add, Remove } from "@mui/icons-material";
 import { mobile } from "../responsive";
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 
 const Container = styled.div`
@@ -102,24 +106,40 @@ const Button = styled.button`
 `;
 
 const Product = () => {
+    const location = useLocation();
+    const id = location.pathname.split('/')[2];
+    const [product, setProduct] = useState({});
+    
+    useEffect(() => {
+        const getProduct  = async () => {
+            try {
+                const {data} = await axios.get(`/products/singleProduct/${id}`);
+                setProduct(data);
+            } catch (err) {
+                
+            }
+        }
+        getProduct();
+    }, [id])
+
   return (
     <Container>
         <Navbar/>
         <Announcement/>
         <Wrapper>
             <ImgContainer>
-            <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
+            <Image src={product.img}/>
             </ImgContainer>
             <InfoContainer>
-                <Title>Denim Jumpsuit</Title>
-                <Desc>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo, rerum animi laudantium quia ratione hic facilis culpa sint distinctio libero.</Desc>
-                <Price>$ 20</Price>
+                <Title>{product.title}</Title>
+                <Desc>{product.desc}</Desc>
+                <Price>$ {product.price}</Price>
                 <FilterContainer>
                     <Filter>
                         <FilterTitle>Color</FilterTitle>
-                        <FilterColor color="black"/>
-                        <FilterColor color="darkblue"/>
-                        <FilterColor color="gray"/>
+                        {product.color.map((c) => (
+                            <FilterColor color={c} key={c}/>
+                        ))}
                     </Filter>
                     <Filter>
                         <FilterTitle>Size</FilterTitle>
