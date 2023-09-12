@@ -1,8 +1,8 @@
-const User = require('../models/User');
-const {StatusCodes} = require('http-status-codes');
+import User from '../models/User.js';
+import { StatusCodes } from 'http-status-codes';
 
 //GET All USERS
-exports.allUsers = async (req,res) => {
+export const allUsers = async (req,res) => {
     try {
         const users = await User.find({})
         if(!users) {
@@ -17,7 +17,7 @@ exports.allUsers = async (req,res) => {
 }
 
 //GOT SINGLE USER WITH USERNAME
-exports.getSingleUser = async (req, res) => {
+export const getSingleUser = async (req, res) => {
     try {
         const {username: username} = req.params
 
@@ -35,7 +35,7 @@ exports.getSingleUser = async (req, res) => {
 }  
 
 //UPDATE USER 
-exports.updateUser = async (req, res) => {
+export const updateUser = async (req, res) => {
     try {
         const {id : _id} = req.params
 
@@ -53,7 +53,7 @@ exports.updateUser = async (req, res) => {
 }
 
 //DELETE USER
-exports.deleteUser = async (req, res) => {
+export const deleteUser = async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id)
         return res.status(StatusCodes.OK).json({msg:'User deleted successfully'})
@@ -65,7 +65,7 @@ exports.deleteUser = async (req, res) => {
 }
 
 //GET USER STATS
-exports.userStats = async (req, res) => {
+export const userStats = async (req, res) => {
     try {
         const date = new Date()
         const lastYear = new Date(date.setFullYear(date.getFullYear() - 1))

@@ -1,9 +1,8 @@
-const Product = require('../models/Product');
-const {StatusCodes} = require('http-status-codes');
-
+import Product from '../models/Product.js';
+import { StatusCodes } from 'http-status-codes';
 
 //CREATE PRODUCT
-exports.createProduct = async (req,res)=> {
+export const createProduct = async (req,res)=> {
     try {
         const newProduct = new Product(req.body);
         
@@ -16,7 +15,7 @@ exports.createProduct = async (req,res)=> {
 }
 
 //GET PRODUCT
-exports.getSingleProduct = async (req, res) => {
+export const getSingleProduct = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
         return res.status(StatusCodes.OK).json(product)
@@ -27,7 +26,7 @@ exports.getSingleProduct = async (req, res) => {
 }
 
 //GET ALL PRODUCTS
-exports.getAllProducts = async (req, res) => {
+export const getAllProducts = async (req, res) => {
     try {
         const qNew = req.query.new
         const qCategory = req.query.category
@@ -56,7 +55,7 @@ exports.getAllProducts = async (req, res) => {
 }
 
 //UPDATE PRODUCT
-exports.updateProduct = async (req, res) => {
+export const updateProduct = async (req, res) => {
     try {
         const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {$set:req.body,},{new:true});
         return res.status(StatusCodes.OK).json(updatedProduct)
@@ -67,7 +66,7 @@ exports.updateProduct = async (req, res) => {
 }
 
 //DELETE PRODUCT
-exports.deleteProduct = async (req, res) => {
+export const deleteProduct = async (req, res) => {
     try {
         await Product.findByIdAndDelete(req.params.id);
         return res.status(StatusCodes.OK).json({msg: 'Product deleted successfully'});

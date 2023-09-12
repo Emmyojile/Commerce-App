@@ -1,7 +1,19 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const {updateOrder,createOrder, deleteOrder, getUserOrders, getAllOrders,getIncome} = require('../controllers/order')
-const {verifyToken, verifyTokenAndAuth, verifyTokenAndAdmin} = require('../middlewares/auth')
+import {
+  updateOrder,
+  createOrder,
+  deleteOrder,
+  getUserOrders,
+  getAllOrders,
+  getIncome,
+} from '../controllers/order.js';
+import {
+  verifyToken,
+  verifyTokenAndAuth,
+  verifyTokenAndAdmin,
+} from '../middlewares/auth.js';
+
 
 
 router.route('/').post(verifyToken,createOrder).get(verifyTokenAndAdmin,getAllOrders)
@@ -9,4 +21,4 @@ router.route('/:id').put(verifyTokenAndAdmin, updateOrder).delete(verifyTokenAnd
 router.route('/:userId').get(verifyTokenAndAuth,getUserOrders)
 router.route('/income').get(verifyTokenAndAdmin, getIncome)
 
-module.exports = router
+export default router

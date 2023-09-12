@@ -1,7 +1,7 @@
-const {StatusCodes} = require('http-status-codes')
-const jwt = require('jsonwebtoken')
+import { StatusCodes } from 'http-status-codes';
+import jwt  from 'jsonwebtoken';
 
-const verifyToken = async (req, res, next) => {
+export const verifyToken = async (req, res, next) => {
     try {
         const authHeader = req.headers.token
 
@@ -23,7 +23,7 @@ const verifyToken = async (req, res, next) => {
     }
 }
 
-const verifyTokenAndAuth = async (req, res, next) => {
+export const verifyTokenAndAuth = async (req, res, next) => {
     try {
         verifyToken(req,res, () => {
             if (req.user.id === req.params.id || req.user.isAdmin){
@@ -39,7 +39,7 @@ const verifyTokenAndAuth = async (req, res, next) => {
     }
 }
 
-const verifyTokenAndAdmin = (req, res, next) => {
+export const verifyTokenAndAdmin = (req, res, next) => {
     try {
         verifyToken(req, res, () => {
             if (req.user.isAdmin) {
@@ -54,7 +54,7 @@ const verifyTokenAndAdmin = (req, res, next) => {
     }
   };
 
-module.exports = { verifyToken, verifyTokenAndAuth, verifyTokenAndAdmin}
+// module.exports = { verifyToken, verifyTokenAndAuth, verifyTokenAndAdmin}
 
 
 // const authMiddleware = async (req, res, next) => {

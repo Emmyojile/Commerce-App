@@ -1,4 +1,4 @@
-import express from "express";
+// import express from "express";
 import fetch from "node-fetch";
 import "dotenv/config";
 import path from "path";
@@ -6,7 +6,7 @@ import path from "path";
 const express = require('express');
 const router = express.Router();
 
-const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PORT = 8888 } = process.env;
+const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PORT} = process.env;
 const base = "https://api-m.sandbox.paypal.com";
 const app = express();
 
@@ -122,7 +122,7 @@ async function handleResponse(response) {
   }
 }
 
-router.route('/register').post(register);
+// router.route('/register').post(register);
 
 router.post("/api/orders", async (req, res) => {
   try {
@@ -149,6 +149,9 @@ router.post("/api/orders/:orderID/capture", async (req, res) => {
 
 
 module.exports = router;
+
+
+
 // serve index.html
 app.get("/", (req, res) => {
   res.sendFile(path.resolve("./client/checkout.html"));

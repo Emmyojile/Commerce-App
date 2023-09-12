@@ -1,8 +1,8 @@
-const User = require('../models/User')
-const {StatusCodes} = require('http-status-codes')
+import User from '../models/User.js';
+import { StatusCodes } from 'http-status-codes';
 
 
-exports.register = async (req,res) => {
+export const register = async (req,res) => {
     try {
         const { username, email, password} = req.body
 
@@ -27,7 +27,7 @@ exports.register = async (req,res) => {
     }
 }
 
-exports.login = async (req,res) => {
+export const login = async (req,res) => {
     try {
         const {email,password} = req.body
         if(!email || !password) {

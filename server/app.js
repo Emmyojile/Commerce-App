@@ -1,9 +1,10 @@
-require('dotenv').config();
-const express = require('express');
-const connectDB = require('./db/connect');
+import 'dotenv/config';
+import express from 'express';
+import connectDB from './db/connect.js';
+import cors from 'cors';
+
 const app = express();
 const PORT = process.env.PORT || 5000;
-const cors = require("cors")
 
 const corsOptions = {
     origin: ["*", "http://localhost:5173"], // Update this with the allowed origins or set it to a specific origin
@@ -15,9 +16,16 @@ const corsOptions = {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+
+
+
+
 //ROUTES
-const apiRoutes = require("./routes/index");
-app.use('/api', apiRoutes)
+import apiRoutes from "./routes/index.js";
+app.use("/api", apiRoutes);
+// const payPalRoutes = require("./routes/paypal");
+// app.use('/', payPalRoutes)
 
 app.use('/', (req, res) => {
     res.json("E-commerce Server")

@@ -1,10 +1,9 @@
-const { json } = require('express');
-const Order = require('../models/Order')
-const {StatusCodes} = require('http-status-codes');
+import Order from '../models/Order.js';
+import { StatusCodes } from 'http-status-codes';
 
 
 //CREATE ORDER
-exports.createOrder = async (req, res,) => {
+export const createOrder = async (req, res,) => {
     try {
         const newOrder = new Order(req.body)
 
@@ -17,7 +16,7 @@ exports.createOrder = async (req, res,) => {
 }
 
 //UPDATE ORDER
-exports.updateOrder = async (req, res,) => {
+export const updateOrder = async (req, res,) => {
     try {
         const updatedOrder = await Order.findByIdAndUpdate(req.params.id,{$set: req.body},{new: true});
         return res.status(StatusCodes.OK).json({updatedOrder})
@@ -28,7 +27,7 @@ exports.updateOrder = async (req, res,) => {
 }
 
 //DELETE ORDER
-exports.deleteOrder = async (req,response) => {
+export const deleteOrder = async (req,response) => {
     try {
         await Order.findByIdAndDelete(req.params.id)
         return response.status(StatusCodes.OK).json({msg: 'Order deleted successfully'})        
@@ -39,7 +38,7 @@ exports.deleteOrder = async (req,response) => {
 }
 
 //GET USER ORDERS
-exports.getUserOrders = async (req, res) => {
+export const getUserOrders = async (req, res) => {
     try {
         const orders = await Order.find({userId: req.params.userId})
         return res.status(StatusCodes.OK).json({orders})
@@ -50,7 +49,7 @@ exports.getUserOrders = async (req, res) => {
 }
 
 //GET ALL ORDERS
-exports.getAllOrders = async (req,res) => {
+export const getAllOrders = async (req,res) => {
     try {
         const orders = await Order.find({})
         return res.status(StatusCodes.OK).json({orders})
@@ -90,7 +89,7 @@ exports.getAllOrders = async (req,res) => {
 // }
 
 
-exports.getIncome = async (req,res) => {
+export const getIncome = async (req,res) => {
     const date = new Date();
     const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
     const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));

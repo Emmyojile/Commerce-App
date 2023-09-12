@@ -1,11 +1,11 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
+import cartRoutes from './cart.js';
+import orderRoutes from './order.js';
+import productRoutes from './product.js';
+import userRoutes from './user.js';
+import authRoutes from './auth.js';
 
-const cartRoutes = require("./cart")
-const orderRoutes = require("./order")
-const productRoutes = require("./product")
-const userRoutes = require("./user")
-const authRoutes = require("./auth")
 
 router.use("/cart", cartRoutes);
 router.use("/orders", orderRoutes);
@@ -14,4 +14,4 @@ router.use("/users", userRoutes);
 router.use("/", authRoutes);
 
 
-module.exports = router;
+export default router;

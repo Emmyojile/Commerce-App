@@ -1,9 +1,9 @@
-const { response } = require('express');
-const Cart = require('../models/Cart')
-const {StatusCodes} = require('http-status-codes')
+import Cart from '../models/Cart.js';
+import { StatusCodes } from 'http-status-codes';
+
 
 //CREATE CART
-exports.createCart = async (req, res) => {
+export const createCart = async (req, res) => {
     try {
         const newCart = await Cart(req.body)
 
@@ -16,7 +16,7 @@ exports.createCart = async (req, res) => {
 }
 
 //UPDATE CART
-exports.updateCart = async (req, res) =>{
+export const updateCart = async (req, res) =>{
     try {
         const updatedCart = await Cart.findByIdAndUpdate(req.params.id, {$set:req.body}, {new:true});
         return res.status(StatusCodes.OK).json({updatedCart})
@@ -27,7 +27,7 @@ exports.updateCart = async (req, res) =>{
 }
 
 //DELETE CART
-exports.deleteCart = async (req, res) => {
+export const deleteCart = async (req, res) => {
     try {
         await Cart.findByIdAndDelete(req.params.id)
         return res.status(StatusCodes.OK).json({msg: 'Cart deleted successfully'}); 
@@ -38,7 +38,7 @@ exports.deleteCart = async (req, res) => {
 }
 
 //GET USER CART
-exports.getUserCart = async (req, res) => {
+export const getUserCart = async (req, res) => {
     try {
         const cart = await Cart.findOne({userId: req.params.userId})
         return res.status(StatusCodes.OK).json({cart})
@@ -49,7 +49,7 @@ exports.getUserCart = async (req, res) => {
 }
 
 //GET ALL CARTS
-exports.getAllCarts = async (req, res) => {
+export const getAllCarts = async (req, res) => {
     try {
         const carts = await Cart.find()
         return res.status(StatusCodes.OK).json({carts})

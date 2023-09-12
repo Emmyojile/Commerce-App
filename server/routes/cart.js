@@ -1,11 +1,22 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const {createCart, updateCart, deleteCart, getUserCart, getAllCarts} = require('../controllers/cart')
-const {verifyToken, verifyTokenAndAuth, verifyTokenAndAdmin} = require('../middlewares/auth')
+import {
+  createCart,
+  updateCart,
+  deleteCart,
+  getUserCart,
+  getAllCarts,
+} from '../controllers/cart.js';
+import {
+  verifyToken,
+  verifyTokenAndAuth,
+  verifyTokenAndAdmin,
+} from '../middlewares/auth.js';
+
 
 router.route('/').post(verifyToken, createCart).delete(verifyTokenAndAuth, deleteCart)
 router.route('/:userId').get(verifyTokenAndAuth, getUserCart)
 router.route('/:id').put(verifyTokenAndAuth, updateCart)
 router.route('/').get(verifyTokenAndAdmin, getAllCarts)
 
-module.exports = router
+export default router
