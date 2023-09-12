@@ -7,6 +7,7 @@ import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import Paypal from "../Payment/Paypal";
 
 
 const Container = styled.div``;
@@ -201,7 +202,8 @@ const Cart = () => {
                 <SummaryItemText>Total</SummaryItemText>
                 <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <PayPalButtons/>
+            <Paypal/>
+            {/* <PayPalButtons/> */}
             {/* <Button>CHECK OUT NOW</Button> */}
           </Summary>
         </Bottom>
