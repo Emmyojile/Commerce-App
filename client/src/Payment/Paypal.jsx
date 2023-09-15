@@ -1,9 +1,11 @@
 import { PayPalButtons } from "@paypal/react-paypal-js";
 
 const Paypal = () => {
+
+    const serverUrl = "http://localhost:8888/"
     const createOrder = (data) => {
         // Order is created on the server and the order id is returned
-        return fetch("/my-server/create-paypal-order", {
+        return fetch(`${serverUrl}/my-server/create-paypal-order`, {
           method: "POST",
            headers: {
             "Content-Type": "application/json",
@@ -22,7 +24,7 @@ const Paypal = () => {
       };
       const onApprove = (data) => {
          // Order is captured on the server and the response is returned to the browser
-         return fetch("/my-server/capture-paypal-order", {
+         return fetch(`${serverUrl}/my-server/capture-paypal-order`, {
           method: "POST",
            headers: {
             "Content-Type": "application/json",

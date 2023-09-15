@@ -1,20 +1,20 @@
-// import express from "express";
+import express from "express";
 import fetch from "node-fetch";
 import "dotenv/config";
 import path from "path";
 
-const express = require('express');
+// const express = require('express');
 const router = express.Router();
 
 const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PORT} = process.env;
 const base = "https://api-m.sandbox.paypal.com";
-const app = express();
+// const app = express();
 
 // host static files
-app.use(express.static("client"));
+// app.use(express.static("client"));
 
-// parse post params sent in body in json format
-app.use(express.json());
+// // parse post params sent in body in json format
+// app.use(express.json());
 
 /**
  * Generate an OAuth 2.0 access token for authenticating with PayPal REST APIs.
@@ -148,15 +148,14 @@ router.post("/api/orders/:orderID/capture", async (req, res) => {
 });
 
 
-module.exports = router;
-
+export default router;
 
 
 // serve index.html
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve("./client/checkout.html"));
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(path.resolve("./client/checkout.html"));
+// });
 
-app.listen(PORT, () => {
-  console.log(`Node server listening at http://localhost:${PORT}/`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Node server listening at http://localhost:${PORT}/`);
+// });
